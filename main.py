@@ -13,12 +13,12 @@ import re
 import os
 import os.path
 
+app = Flask(__name__)
 db = SQLAlchemy()
 login_manager = LoginManager()
 
 
 def create_app(config_class=None):
-    app = Flask(__name__)
     if config_class is None:
         app.config.from_object('config.DevelopmentConfig')
     else:
