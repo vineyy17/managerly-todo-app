@@ -12,6 +12,9 @@ import validators
 import re
 import os
 import os.path
+import config
+
+
 
 app = Flask(__name__)
 db = SQLAlchemy()
@@ -204,4 +207,5 @@ def logout():
 
 
 if __name__ == "__main__":
+    app = create_app()
     app.run(debug=True)
