@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template, redirect, url_for, flash, abort, Response, request, session
 from flask_bootstrap import Bootstrap
 from datetime import date
@@ -13,6 +12,9 @@ import validators
 import re
 import os
 import os.path
+
+db = SQLAlchemy()
+login_manager = LoginManager()
 
 
 def create_app(config_class=None):
@@ -32,6 +34,7 @@ def create_app(config_class=None):
     @login_manager.user_loader
     def load_user(user_id):
         return Details.query.get(int(user_id))
+
     return app
 
 
@@ -158,7 +161,7 @@ def show_tasks():
     return render_template("todo.html", todo_list=todo_list, name=name)
 
 
-@app.route("/add", methods=["GET","POST"])
+@app.route("/add", methods=["GET", "POST"])
 @login_required
 def add_tasks():
     if not current_user.is_authenticated:
@@ -202,5 +205,3 @@ def logout():
 
 if __name__ == "__main__":
     app.run(debug=True)
-
-
