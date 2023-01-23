@@ -1,0 +1,55 @@
+body{
+text-align: center;
+font-family: "Montserrat";
+}
+
+.head-image {
+width: 60%;
+height: 60%;
+}
+
+.body-div {
+padding: 0, 0, 500px;
+}
+
+.start-button {
+margin-bottom: 30px;
+}
+
+.container-fluid {
+padding: 0.5% 12%;
+}
+
+.navbar {
+}
+
+.nav-item {
+padding: 0 18px;
+}
+
+.navbar-brand {
+font-size: 2rem;
+}
+
+.btn-primary {
+-webkit-appearance: button;
+-moz-appearance: button;
+appearance: button;
+
+text-decoration: none;
+color: white;
+}
+
+.footer-icon {
+margin: 10px 10px 20px;
+}
+
+.footer_text{
+color: #8f8f8f;
+font-weight: 400;
+}
+
+.footer-link {
+text-decoration: none;
+color: black;
+}

@@ -1,0 +1,50 @@
+body{
+text-align: center;
+font-family: "Montserrat";
+font-size: 1rem;
+}
+
+.sign-in-img{
+width: 40%;
+height: 40%;
+}
+
+.top-title{
+font-size: 2rem;
+}
+
+.col-centered{
+    margin: 0 auto;
+    float: none;
+}
+
+.form-label{
+margin-right: 50%;
+}
+
+.label1{
+margin-right: 54%;
+}
+
+.label2{
+margin-right: 49%;
+}
+
+.label3{
+margin-right: 52%;
+}
+
+.label4{
+margin-right: 47%;
+}
+
+btn-primary{
+margin-top: 20px;
+-webkit-appearance: button;
+-moz-appearance: button;
+appearance: button;
+}
+
+input[type="checkbox"] {
+    display: none;
+}

@@ -1,0 +1,53 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;900&family=Ubuntu&display=swap"
+          rel="stylesheet">
+
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/sign-in.css') }}" rel="stylesheet">
+    <title>Sign-in</title>
+</head>
+<body>
+<img src="{{ url_for('static', filename='img/businessman-holding-pencil.jpg')}}" class="sign-in-img">
+<p class="top-title">Sign In</p>
+<div>
+    <div style="color: red">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+        </div>
+    <form method="post" action="{{ url_for('sign_in') }}">
+  <div class="col-sm-7 col-centered">
+      {% for error in errors %}
+            <p style="color: red;">{{ error }}</p>
+      {% endfor %}
+      <div class="input-group mb-3">
+  <span class="input-group-text">Email Address</span>
+    <input class="form-control" name="email_address" aria-describedby="emailHelp">
+          </div>
+            </div>
+        <div class="col-sm-7 col-centered">
+      <div class="input-group mb-3">
+  <span class="input-group-text" >Password</span>
+    <input type="password" class="form-control" name="password_input" aria-describedby="emailHelp">
+          </div>
+            </div>
+  <button type="submit" class="btn btn-primary">Sign In</button>
+</form>
+<div>
+    <p class="sign-up-text">Don't have an account? <span><a href="/sign-up" style="text-decoration: none;">Sign up</a></span></p>
+    </div>
+
+</body>
+</html>

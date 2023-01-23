@@ -1,0 +1,35 @@
+body{
+text-align: center;
+font-family: "Montserrat";
+font-size: 1rem;
+}
+
+.sign-in-img{
+width: 40%;
+height: 40%;
+}
+
+.top-title{
+font-size: 2rem;
+}
+
+.sign-in-text{
+font-size: 1.5rem;
+}
+
+.sign-up-text{
+margin-top: 5px;
+}
+
+.col-centered{
+    margin: 0 auto;
+    float: none;
+}
+
+.label1{
+margin-right: 49%;
+}
+
+.label2{
+margin-right: 52%;
+}
