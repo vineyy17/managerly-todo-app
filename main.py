@@ -15,24 +15,25 @@ import os
 import os.path
 
 
-app = Flask(__name__)
-app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
-# postgres://todo_database_6xky_user:H5OgZHrdtb5sxKAUuaRZ7A3wGAfA6wwC@dpg-cf5kstta499d72s42n40-a.oregon-postgres.render.com/todo_database_6xky
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
-Bootstrap(app)
+def create_app(config_class=None):
+    app = Flask(__name__)
+    if config_class is None:
+        app.config.from_object('config.DevelopmentConfig')
+    else:
+        app.config.from_object(config_class)
+    app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    Bootstrap(app)
+    db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'login'
 
-login_manager = LoginManager()
-login_manager.init_app(app)
-login_manager.login_view = 'login'
+    @login_manager.user_loader
+    def load_user(user_id):
+        return Details.query.get(int(user_id))
+    return app
 
-
-@login_manager.user_loader
-def load_user(user_id):
-    return Details.query.get(int(user_id))
-
-print(os.path.abspath(__file__))
 
 def login_required(f):
     @wraps(f)
