@@ -18,7 +18,7 @@ font-size: 1.5rem;
 }
 
 .sign-up-text{
-margin-top: 5px;
+margin-top: 1.5rem;
 }
 
 .col-centered{
@@ -32,4 +32,32 @@ margin-right: 49%;
 
 .label2{
 margin-right: 52%;
+}
+
+.footer-icon {
+margin: 10px 10px 20px;
+}
+
+.footer_text{
+color: #8f8f8f;
+font-weight: 400;
+}
+
+.footer-link {
+text-decoration: none;
+color: black;
+}
+
+@media (max-width: 600px) {
+body{
+margin-top: 8rem;
+margin-left: 2rem;
+margin-right: 2rem;
+}
+
+
+.footer_text{
+color: #8f8f8f;
+margin-top: 15rem;
+}
 }
