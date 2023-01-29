@@ -14,8 +14,6 @@ import os
 import os.path
 import config
 
-
-
 app = Flask(__name__)
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -26,7 +24,7 @@ def create_app(config_class=None):
         app.config.from_object('config.DevelopmentConfig')
     else:
         app.config.from_object(config_class)
-    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
+    app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     Bootstrap(app)
@@ -158,7 +156,7 @@ def show_tasks():
     if not current_user.is_authenticated:
         return redirect(url_for('sign_in'))
     todo_list = Todo.query.filter_by(user_id=current_user.id).all()
-    name = session['form_data'].get('name_input')
+    name = current_user.name
     if request.method == "POST":
         return render_template('todo.html', todo_list=todo_list, name=name)
     return render_template("todo.html", todo_list=todo_list, name=name)
