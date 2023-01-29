@@ -145,7 +145,7 @@ def sign_up():
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
-                todo_list = Todo.query.all()
+                todo_list = Todo.query.filter_by(user_id=current_user.id).all()
                 return render_template("todo.html", todo_list=todo_list, name=user_name)
     return render_template("sign-up.html", errors=errors, session=session, logged_in=current_user.is_authenticated)
 
