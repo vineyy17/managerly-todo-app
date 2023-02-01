@@ -105,7 +105,6 @@ def sign_up():
         user_name = session['form_data'].get('name_input')
         email = session['form_data'].get('email_address')
         password = session['form_data'].get('password_input')
-        # pattern = re.compile("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])[A-Za-z0-9!@#\$%\^&\*]{6,}$")
         confirm_password = session['form_data'].get('password_confirmation')
         if not user_name:
             errors.append('Name is required.')
@@ -117,8 +116,6 @@ def sign_up():
             errors.append('Password is required.')
         elif not password == confirm_password:
             errors.append('Both passwords do not match.')
-        # elif not pattern.match(password):
-        #     errors.append("Password must contain at least six letters, one number and one symbol.")
         if not errors:
             user = Details.query.filter_by(email=email).first()
             if user:
