@@ -38,7 +38,12 @@
       {% endfor %}
       <div class="input-group mb-3">
   <span class="input-group-text">Email Address</span>
-    <input class="form-control" name="email_address" aria-describedby="emailHelp">
+    {% if session.get('form_data') %}
+               <input id="email" class="form-control" name="email_address" value="{{ session.get('form_data').get
+               ('email_address') }}" aria-describedby="emailHelp">
+          {% else %}
+               <input id="email" class="form-control" name="email_address" value="" placeholder="example@gmail.com" aria-describedby="emailHelp">
+          {% endif %}
           </div>
             </div>
         <div class="col-sm-7 col-centered">

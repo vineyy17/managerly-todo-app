@@ -64,21 +64,6 @@ class Details(UserMixin, db.Model):
     password = db.Column(db.String(150))
     tasks = db.relationship('Todo', backref='user')
 
-
-# with app.app_context():
-#     db.create_all()
-
-
-#     user_details = Details.query.filter_by(email='viney@gmail.com').first()
-#     if user_details:
-#         print("User already exists")
-#     else:
-#         user_details = Details(name='Divine', email='viney@gmail.com', password='kylianb')
-#         db.session.add(user_details)
-#         db.session.commit()
-#         print("Added to the database")
-
-
 @app.route('/')
 def home():
     return render_template("index.html")
@@ -88,8 +73,9 @@ def home():
 def sign_in():
     errors = []
     if request.method == 'POST':
-        email = request.form.get('email_address')
-        password = request.form.get('password_input')
+        session['form_data'] = request.form
+        email = session['form_data'].get('email_address')
+        password = session['form_data'].get('password_input')
         if not email:
             errors.append('Email is required.')
         elif not validators.email(email):
@@ -108,7 +94,7 @@ def sign_in():
             else:
                 flash("That user does not exist, try again.")
 
-    return render_template("sign-in.html", errors=errors, logged_in=current_user.is_authenticated)
+    return render_template("sign-in.html", errors=errors, session=session, logged_in=current_user.is_authenticated)
 
 
 @app.route('/sign-up', methods=["POST", "GET"])
@@ -145,6 +131,7 @@ def sign_up():
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
+                current_user.is_authenticated = True
                 todo_list = Todo.query.filter_by(user_id=current_user.id).all()
                 return render_template("todo.html", todo_list=todo_list, name=user_name)
     return render_template("sign-up.html", errors=errors, session=session, logged_in=current_user.is_authenticated)
