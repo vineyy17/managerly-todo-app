@@ -43,23 +43,13 @@
             {% endfor %}
       <div class="input-group mb-3">
   <span class="input-group-text">Name</span>
-          {% if session.get('form_data') %}
-               <input id="name" type="text" class="form-control" name="name_input" value="{{ session.get('form_data').
-               get('name_input') }}" aria-describedby="emailHelp">
-          {% else %}
                <input id="name" type="text" class="form-control" name="name_input" value="" aria-describedby="emailHelp">
-          {% endif %}
           </div>
             </div>
   <div class="col-sm-7 col-centered">
       <div class="input-group mb-3">
   <span class="input-group-text">Email Address</span>
-          {% if session.get('form_data') %}
-               <input id="email" class="form-control" name="email_address" value="{{ session.get('form_data').get
-               ('email_address') }}" aria-describedby="emailHelp">
-          {% else %}
                <input id="email" class="form-control" name="email_address" value="" aria-describedby="emailHelp">
-          {% endif %}
           </div>
             </div>
         <div class="col-sm-7 col-centered">
