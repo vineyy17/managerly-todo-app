@@ -42,13 +42,13 @@
       <p class="ui big header"> <i class="fa-sharp fa-solid fa-square"></i>  {{ todo.title }}</p>
 
       {% if todo.complete == False %}
-            <span class="ui gray label">Incomplete</span>
+            <span class="ui gray label action">Incomplete</span>
       {% else %}
-            <span class="ui green label">Completed</span>
+            <span class="ui green label action">Completed</span>
       {% endif %}
 
-      <a class="ui blue button" href="/update/{{ todo.id }}">Update <i class="fa-solid fa-pen"></i></a>
-      <a class="ui red button" href="/delete/{{ todo.id }}">Delete <i class="fa-solid fa-trash"></i></a>
+      <a class="ui blue button action" href="/update/{{ todo.id }}">Update</a>
+      <a class="ui red button action" href="/delete/{{ todo.id }}">Delete</a>
       </div>
 
 

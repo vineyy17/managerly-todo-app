@@ -8,3 +8,8 @@ width: 40%;
 height: 40%;
 }
 
+@media (max-width: 350px) {
+.action{
+width: 31%
+}
+}
