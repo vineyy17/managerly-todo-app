@@ -139,16 +139,18 @@ def sign_up():
                                                                                                 salt_length=8))
                 db.session.add(new_user)
                 db.session.commit()
-                login_user(new_user)
-                todo_list = Todo.query.filter_by(user_id=current_user.id).all()
-                return render_template("todo.html", todo_list=todo_list, name=user_name)
+                # login_user(new_user)
+                # todo_list = Todo.query.filter_by(user_id=current_user.id).all()
+                # return render_template("todo.html", todo_list=todo_list, name=user_name)
+                flash("Sign up successful! You can now log in.")
+                return redirect(url_for('sign_in'))
     return render_template("sign-up.html", errors=errors, session=session)
 
 
 @app.route('/tasks', methods=["GET", "POST"])
 @login_required
 def show_tasks():
-    if not current_user.is_authenticated and request.method != "POST":
+    if not current_user.is_authenticated:
         return redirect(url_for('sign_in'))
     todo_list = Todo.query.filter_by(user_id=current_user.id).all()
     name = current_user.name
