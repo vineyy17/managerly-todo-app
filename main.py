@@ -50,6 +50,16 @@ def login_required(f):
     return wrap
 
 
+def check_password(password):
+    if len(password) < 8:
+        return False
+    if not re.search("[0-9]", password):
+        return False
+    if not re.search("[!@#$%^&*()]", password):
+        return False
+    return True
+
+
 class Todo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100))
@@ -74,7 +84,7 @@ def sign_in():
     errors = []
     if request.method == 'POST':
         session['form_data'] = request.form
-        email = session['form_data'].get('email_address')
+        email = session['form_data'].get('email_address').lower()
         password = session['form_data'].get('password_input')
         if not email:
             errors.append('Email is required.')
@@ -94,7 +104,7 @@ def sign_in():
             else:
                 flash("That user does not exist, try again.")
 
-    return render_template("sign-in.html", errors=errors, session=session, logged_in=current_user.is_authenticated)
+    return render_template("sign-in.html", errors=errors, session=session)
 
 
 @app.route('/sign-up', methods=["POST", "GET"])
@@ -103,7 +113,7 @@ def sign_up():
     if request.method == 'POST':
         session['form_data'] = request.form
         user_name = session['form_data'].get('name_input')
-        email = session['form_data'].get('email_address')
+        email = session['form_data'].get('email_address').lower()
         password = session['form_data'].get('password_input')
         confirm_password = session['form_data'].get('password_confirmation')
         if not user_name:
@@ -114,6 +124,8 @@ def sign_up():
             errors.append('Invalid email address.')
         if not password:
             errors.append('Password is required.')
+        elif not check_password(password):
+            errors.append('Password must be up to 8 characters long containing at least one number and a symbol.')
         elif not password == confirm_password:
             errors.append('Both passwords do not match.')
         if not errors:
@@ -128,10 +140,9 @@ def sign_up():
                 db.session.add(new_user)
                 db.session.commit()
                 login_user(new_user)
-                current_user.is_authenticated = True
                 todo_list = Todo.query.filter_by(user_id=current_user.id).all()
                 return render_template("todo.html", todo_list=todo_list, name=user_name)
-    return render_template("sign-up.html", errors=errors, session=session, logged_in=current_user.is_authenticated)
+    return render_template("sign-up.html", errors=errors, session=session)
 
 
 @app.route('/tasks', methods=["GET", "POST"])

@@ -41,7 +41,22 @@
             {% for error in errors %}
                  <p style="color: red;">{{ error }}</p>
             {% endfor %}
+        {% if errors %}
       <div class="input-group mb-3">
+  <span class="input-group-text">Name</span>
+               <input id="name" type="text" class="form-control" name="name_input" value="{{ session.get('form_data').get
+               ('name_input') }}" aria-describedby="emailHelp">
+          </div>
+            </div>
+  <div class="col-sm-7 col-centered">
+      <div class="input-group mb-3">
+  <span class="input-group-text">Email Address</span>
+               <input id="email" class="form-control" name="email_address" value="{{ session.get('form_data').get
+               ('email_address') }}" aria-describedby="emailHelp">
+          </div>
+            </div>
+        {% else %}
+        <div class="input-group mb-3">
   <span class="input-group-text">Name</span>
                <input id="name" type="text" class="form-control" name="name_input" value="" aria-describedby="emailHelp">
           </div>
@@ -52,6 +67,7 @@
                <input id="email" class="form-control" name="email_address" value="" aria-describedby="emailHelp">
           </div>
             </div>
+        {% endif %}
         <div class="col-sm-7 col-centered">
       <div class="input-group mb-3">
   <span class="input-group-text" >Password</span>
