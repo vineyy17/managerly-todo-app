@@ -148,7 +148,7 @@ def sign_up():
 @app.route('/tasks', methods=["GET", "POST"])
 @login_required
 def show_tasks():
-    if not current_user.is_authenticated:
+    if not current_user.is_authenticated and request.method != "POST":
         return redirect(url_for('sign_in'))
     todo_list = Todo.query.filter_by(user_id=current_user.id).all()
     name = current_user.name
