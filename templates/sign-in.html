@@ -41,7 +41,7 @@
             <p style="color: red;">{{ error }}</p>
       {% endfor %}
       <div class="input-group mb-3">
-  <span class="input-group-text">Email Address</span>
+  <span class="input-group-text">Email</span>
     {% if session.get('form_data') %}
                <input id="email" class="form-control" name="email_address" value="{{ session.get('form_data').get
                ('email_address') }}" aria-describedby="emailHelp">
