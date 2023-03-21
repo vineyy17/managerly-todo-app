@@ -24,7 +24,7 @@ def create_app(config_class=None):
         app.config.from_object('config.DevelopmentConfig')
     else:
         app.config.from_object(config_class)
-    app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
+    app.config['SECRET_KEY'] = os.environ.get("SECRET_KEY")
     app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get("DATABASE_URL")
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     Bootstrap(app)
