@@ -74,6 +74,7 @@ class Details(UserMixin, db.Model):
     password = db.Column(db.String(150))
     tasks = db.relationship('Todo', backref='user')
 
+
 @app.route('/')
 def home():
     return render_template("index.html")
