@@ -139,9 +139,6 @@ def sign_up():
                                                                                                 salt_length=8))
                 db.session.add(new_user)
                 db.session.commit()
-                # login_user(new_user)
-                # todo_list = Todo.query.filter_by(user_id=current_user.id).all()
-                # return render_template("todo.html", todo_list=todo_list, name=user_name)
                 flash("Sign up successful! You can now log in.")
                 return redirect(url_for('sign_in'))
     return render_template("sign-up.html", errors=errors, session=session)
@@ -166,8 +163,9 @@ def add_tasks():
         return redirect(url_for('sign_in'))
     title = request.form.get("title")
     new_todo = Todo(title=title, complete=False, user_id=current_user.id)
-    db.session.add(new_todo)
-    db.session.commit()
+    if len(new_todo.title) > 0:
+        db.session.add(new_todo)
+        db.session.commit()
     return redirect(url_for("show_tasks"))
 
 
