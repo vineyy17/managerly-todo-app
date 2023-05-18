@@ -43,10 +43,5 @@ delete tasks to keep track of their to-do list.
 <li>Submit a pull request</li>
 </ol>
 
-<h2>License</h2>
-<ol>
-<li>This project is licensed under the MIT License.</li>
-</ol>
-
 
 
